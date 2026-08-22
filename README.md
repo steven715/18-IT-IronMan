@@ -46,7 +46,7 @@
 | 27 | 我怎麼評斷一套協作框架 | — | [day27.md](day27.md) |
 | 28 | 預備日：讀者回應（Plan A）／用系列期間累積的遙測數據檢核 ABR 觸發條件（Plan B） | — | [day28.md](day28.md) |
 | 29 | 機動日：吸收延誤或加映 | — | [day29.md](day29.md) |
-| 30 | 總結 | — | [day30.md](day30.md) |
+| 30 | 總結＋協作框架彙整 | — | [day30.md](day30.md) |
 
 ## 框架對照說明
 
@@ -60,6 +60,12 @@
 
 測量方式（2×2 分類、量表欄位、混淆變數聲明、預註冊表）定義在 [docs/methodology.md](docs/methodology.md)。
 
+## 協作框架怎麼長出來
+
+簡介裡說的「提供我個人的 AI 協作框架」不是最後一天才動筆的東西。[docs/collaboration-framework.md](docs/collaboration-framework.md) 從 Day 1 就開始寫，每天把踩到的雷追加進去——那些「我以為 AI 會知道、但它其實不知道」的專案潛規則。Day 30 做的是彙整，不是從零生出一份框架。
+
+Vaultflix 在鐵人賽開始前就已經開發一段時間，那段期間踩的雷會在 Day 1–9 介紹專案時一併回填進去。
+
 Day 12 上線的遙測 endpoint 在系列期間持續收數據，Day 28 的 Plan B 用這批數據回答 ROADMAP 上 ABR 的觸發條件——外網的 rebuffer ratio 是不是高到值得做。
 
 這個系列不做框架排名宣稱。三個功能標的難度不同，作者對 superpowers 較熟、熟練度又會隨系列累積，所以結論一律是「使用報告＋條件限定」。
@@ -71,6 +77,7 @@ Day 12 上線的遙測 endpoint 在系列期間持續收數據，Day 28 的 Plan
 | `day1.md` ~ `day30.md` | 文章本體 |
 | [CLAUDE.md](CLAUDE.md) | 給 AI 協作者的專案規則：人機邊界與文章驗收 |
 | [docs/methodology.md](docs/methodology.md) | 系列測量方法論 |
+| [docs/collaboration-framework.md](docs/collaboration-framework.md) | 持續收斂中的協作框架與踩雷素材，Day 30 交付 |
 | [templates/article-template.md](templates/article-template.md) | 文章骨架範本 |
 
 ## 授權聲明
