@@ -1,0 +1,14 @@
+{
+  "day1": {
+    "articleId": "10404442",
+    "draftUrl": "https://ithelp.ithome.com.tw/articles/10404442/draft",
+    "title": "Day 1: Vaultflix 的前世今生",
+    "images": {
+      "images/day1-login.png": "https://ithelp.ithome.com.tw/upload/images/20260915/20111996V2vtTSJkpc.png",
+      "images/day1-browse.png": "https://ithelp.ithome.com.tw/upload/images/20260915/20111996z1Vl0tBxdk.png",
+      "images/day1-admin-videos.png": "https://ithelp.ithome.com.tw/upload/images/20260915/20111996aIHkK9Jc7i.png",
+      "images/day1-analytics.png": "https://ithelp.ithome.com.tw/upload/images/20260915/20111996CxrD7Z8MiR.png"
+    },
+    "lastSyncedAt": "2026-09-15T00:00:00.000Z"
+  }
+}
