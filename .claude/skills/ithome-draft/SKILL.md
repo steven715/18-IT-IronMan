@@ -1,10 +1,12 @@
 ---
 name: ithome-draft
 description: 把 dayN.md 同步到 iThome 鐵人賽草稿頁（標題、內文、圖片上傳），只存草稿、不發表。用法 /ithome-draft <天數> [草稿網址]
-version: 1.0.0
+version: 1.0.1
 ---
 
 # ithome-draft
+
+> **v1.0.1 注意**：腳本目前只填入標題和內文，**不會**按「儲存草稿」。2026-09-16 同步 Day 2 時，腳本按「儲存草稿」的結果是文章直接被發表。根因未明前，儲存由作者自己按。詳見文末版本紀錄。
 
 把 `day<N>.md` 推到 iThome 的草稿頁。機械的部分由 `draft.mjs` 做，判斷的部分由你做。
 
@@ -14,7 +16,7 @@ version: 1.0.0
 
 - **作者**：在 iThome 按「鐵人發文」開好草稿、把網址給你、最後自己按「發表文章」。
 - **你**：跑驗收、跑腳本、看結果、回報。
-- **腳本**：開 Chrome、等登入、上傳圖片、填標題內文、按「儲存草稿」、重新載入驗證、寫紀錄。
+- **腳本**：開 Chrome、等登入、上傳圖片、填標題內文、寫紀錄。（v1.0.1 起不按「儲存草稿」，也不做儲存後驗證。）
 
 **永遠不按「發表文章」。** 腳本裡沒有那顆按鈕的 selector，你也不要用 MCP 或其他方式去按。發佈是作者的動作，跟 CLAUDE.md 第 4 條（作者未消化前不算完稿）是同一個精神。
 
@@ -30,8 +32,8 @@ version: 1.0.0
    node .claude/skills/ithome-draft/draft.mjs --day <N> --url <草稿網址>
    ```
    腳本印出「被導到登入頁」時，請作者到那個 Chrome 視窗登入，腳本會自己等（最多 5 分鐘）。
-4. **看結果**。腳本結束時會印驗證結果和預覽截圖路徑。用 Read 開那張截圖看一眼排版：標題層級、圖片、程式碼區塊有沒有正常。
-5. **回報**。說清楚：同步了哪一天、幾張圖新上傳、驗證是否通過、截圖看起來如何。最後提醒作者到 iThome 預覽後自己發表。
+4. **請作者自己按「儲存草稿」**。腳本結束時編輯器裡已經有內容但尚未儲存。請作者到那個 Chrome 視窗按「儲存草稿」，用「預覽」看排版。
+5. **回報**。說清楚：同步了哪一天、幾張圖新上傳、內文字數。最後提醒作者：先存草稿、預覽、再自己決定發表。
 6. `.ithome/articles.json` 有變動的話，跟文章一起 commit。
 
 ## 腳本做了什麼、沒做什麼
@@ -62,6 +64,17 @@ version: 1.0.0
 - 圖片上傳：POST `https://ithelp.ithome.com.tw/api/upload`，multipart 欄位 `images[]`，加 `_token` 和 `X-CSRF-TOKEN` header，回 `{"status":"success","url":"..."}`。
 - 預覽：SimpleMDE 工具列的 `a.fa-eye`。
 
+## 待查：儲存草稿為什麼變成發表
+
+2026-09-16 Day 2 的事件紀錄，下次拿到新的草稿頁時要先查清楚，**只讀 DOM 和 JS，不按任何按鈕**：
+
+- Day 1（9/15，手動用 CDP）：在草稿頁用 `button.btn-draft.save-group__btn` 的 `.click()`，頁面沒有導頁，網址留在 `/draft`，重新整理後內容在，文章沒發表。導覽歷史裡沒有這次的 form_submit 條目，推測儲存草稿是 AJAX，不是表單送出。
+- Day 2（9/16，腳本）：同一個 selector `.click()`，導覽歷史出現 `form_submit` 直接到 `/articles/<id>`，文章公開可見（用無痕 context 驗證過）。
+- 推測：「儲存草稿」按鈕靠 JS handler 攔截後用 AJAX 存；表單本身的原生 submit 就是發表。Day 2 那次 handler 沒攔到，原生 submit 就跑掉了。為什麼沒攔到還不知道，可能跟點擊時機（腳本在 load 後一兩秒就按）或 Turnstile 有關。
+- 要查的：草稿頁 inline script 裡 `.save-group__btn`、`#createSubmitBtn`、`#ironmanEditForm` 的 submit / click handler 各做什麼；表單原生送出時伺服器怎麼判斷存草稿還是發表。
+
 ## 版本紀錄
+
+- **1.0.1**（2026-09-16）：停用自動按「儲存草稿」與儲存後驗證。原因見上一節。Day 2 的紀錄手動補進 `.ithome/articles.json`。
 
 - **1.0.0**（2026-09-16）：第一版。從 Day 1 手動用 CDP 填草稿的過程整理而來。

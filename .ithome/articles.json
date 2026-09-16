@@ -10,5 +10,13 @@
       "images/day1-analytics.png": "https://ithelp.ithome.com.tw/upload/images/20260915/20111996CxrD7Z8MiR.png"
     },
     "lastSyncedAt": "2026-09-15T00:00:00.000Z"
+  },
+  "day2": {
+    "articleId": "10412001",
+    "draftUrl": "https://ithelp.ithome.com.tw/articles/10412001/draft",
+    "title": "Day 2：vaultflix 架構與我的經驗回顧",
+    "images": {},
+    "lastSyncedAt": "2026-09-16T14:09:41.000Z",
+    "note": "腳本 v1.0.0 按「儲存草稿」時被直接發表（2026-09-16 22:09 台北時間），見 SKILL.md 待查一節"
   }
 }

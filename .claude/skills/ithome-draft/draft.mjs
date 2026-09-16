@@ -175,16 +175,22 @@ for (const [local, remote] of Object.entries(images)) finalBody = finalBody.spli
 const leftover = (finalBody.match(/!\[[^\]]*\]\((?!https?:\/\/)[^)]*\)/g) || []);
 if (leftover.length) die('還有沒換掉的本機圖片路徑：' + leftover.join(', '));
 
-// ---------- 填入並儲存 ----------
-const saveLoaded = waitForEvent('Page.loadEventFired', 20000);
+// ---------- 填入 ----------
 await evaluate(`(()=>{
   const t=document.querySelector('input[name=subject]'); t.value=${JSON.stringify(title)}; t.dispatchEvent(new Event('input',{bubbles:true}));
   const cm=document.querySelector('.CodeMirror').CodeMirror; cm.setValue(${JSON.stringify(finalBody)}); cm.save();
-  document.querySelector('button.btn-draft.save-group__btn').click();
 })()`);
-log('已按「儲存草稿」，等頁面回來...');
-await saveLoaded.catch(() => {});
-await sleep(500);
+log('標題與內文已填入編輯器（尚未儲存）。');
+
+// ---------- 儲存：v1.0.1 起停用 ----------
+// 2026-09-16 同步 Day 2 時，腳本按下「儲存草稿」的 form submit 直接把文章發表了（導覽歷史：/draft → form_submit → /articles/<id>）。
+// 昨天 Day 1 手動用同一個 selector 按，只存草稿沒發表。兩者差異還沒查清楚，在弄清楚 iThome 的儲存/發表機制之前，
+// 這支腳本不再自動按任何送出按鈕。作者請自己到 Chrome 視窗按「儲存草稿」。
+saveState({ articleId, draftUrl: url, title, images, lastSyncedAt: new Date().toISOString() });
+log('未按「儲存草稿」（v1.0.1 起停用自動儲存，見 SKILL.md 版本紀錄）。請作者到 Chrome 視窗自己按「儲存草稿」，確認存好再決定是否發表。');
+log(`紀錄已寫入 ${path.relative(repo, statePath)}。`);
+ws.close();
+process.exit(0);
 
 // ---------- 重新載入驗證 ----------
 await navigate(url);
