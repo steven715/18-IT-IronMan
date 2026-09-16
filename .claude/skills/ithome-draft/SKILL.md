@@ -1,6 +1,6 @@
 ---
 name: ithome-draft
-description: 把 dayN.md 同步到 iThome 鐵人賽草稿頁（標題、內文、圖片上傳），只存草稿、不發表。用法 /ithome-draft <天數> [草稿網址]
+description: 把 dayN.md 填入 iThome 鐵人賽草稿頁（標題、內文、圖片上傳）。不儲存、不發表，儲存由作者自己按。用法 /ithome-draft <天數> [草稿網址]
 version: 1.0.1
 ---
 
