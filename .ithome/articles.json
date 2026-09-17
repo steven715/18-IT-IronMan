@@ -18,5 +18,12 @@
     "images": {},
     "lastSyncedAt": "2026-09-16T14:09:41.000Z",
     "note": "腳本 v1.0.0 按「儲存草稿」時被直接發表（2026-09-16 22:09 台北時間），見 SKILL.md 待查一節"
+  },
+  "day3": {
+    "articleId": "10412824",
+    "draftUrl": "https://ithelp.ithome.com.tw/articles/10412824/draft",
+    "title": "Day 3：重新定義 Vaultflix 的目錄結構，以及放檔案前先問的六個問題",
+    "images": {},
+    "lastSyncedAt": "2026-09-17T15:59:05.185Z"
   }
 }
